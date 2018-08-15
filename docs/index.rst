@@ -6,7 +6,7 @@
 Welcome to email_notification's documentation!
 ==============================================
 
-Simple packages to send email if log files has error or if healthcheck endpoint is down.
+Simple package to send email, if log file has error or if healthcheck endpoint is down.
 
 Details:
 
