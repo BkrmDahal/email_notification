@@ -1,5 +1,5 @@
-email_notification package
-==========================
+email_notification
+===================
     
     
 email_notification.main

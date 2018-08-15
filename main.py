@@ -10,7 +10,7 @@ import subprocess
 
 import requests
 
-from utils import read_config, logger
+from utils.utils import read_config, logger
 
 # Config file
 config = read_config('config.yaml')
@@ -28,21 +28,21 @@ log = logger("email")
 
 
 def send_email(error_msd, filename):
-	"""
-	send email with error message from log file
-	
-	Args:
-		error_msg:``list``
-			Error message, each sentence as list
-		filename:``str``
-			filename of log file
-			
-	Return:
-		True if success else log error message
-		
-	Raise:
-		``socket.error`` if error while sending message.
-	"""
+    """
+    send email with error message from log file
+
+    Args:
+        error_msg:``list``
+            Error message, each sentence as list
+        filename:``str``
+            filename of log file
+            
+    Return:
+        True if success else log error message
+        
+    Raise:
+        ``socket.error`` if error while sending message.
+    """
     msg = MIMEMultipart()
     msg['From'] = FROM
     msg['To'] = TO
@@ -59,42 +59,42 @@ def send_email(error_msd, filename):
         server.quit()
         return True
     except socket.error as e:
-    	log.debug('email failed: Exception {}'.format(e))
+        log.debug('email failed: Exception {}'.format(e))
         raise
 
 def tail(filename, n):
-	"""
-	Get last n lines from file as string
-	
-	Args:
-		filename:``str``
-			filename of log file
-		n:``int``
-			number of lines
-			
-	Return:
-		lines form file as string
-	"""
+    """
+    Get last n lines from file as string
+
+    Args:
+        filename:``str``
+            filename of log file
+        n:``int``
+            number of lines
+            
+    Return:
+        lines form file as string
+    """
     p=subprocess.Popen(['tail','-n',str(n),filename], stdout=subprocess.PIPE)
-    soutput, sinput=p.communicate()
+    soutput, _=p.communicate()
     lines = soutput.decode('utf8').split('\r')
     return lines
 
 def healthcheck(url):
     """
     check the health of server
-    
+
     Args:
-    	url:``str``
-    		url of healthcheck endpoint
-    		
+        url:``str``
+            url of healthcheck endpoint
+            
     Return:
-    	if live True else False
+        if live True else False
     """
     try:
         r = requests.get('http://localhost:5000/healthcheck')
         output = r.json()
-        code = output['Success']
+        _ = output['Success']
         return True
     except:
         return False
@@ -104,12 +104,12 @@ if __name__ == "__main__":
     # get old time
     loglines = tail('/home/archanalytics/log/email_notification.log', 100)
     if 'down' in loglines[0]:
-        if healthcheck():
+        if healthcheck(HEALTHCHECK_URL):
             log.debug("{}  server is ok".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         else:
             log.debug("{}  server is down".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
     else:
-        if not healthcheck():
+        if not healthcheck(HEALTHCHECK_URL):
             send_email(loglines,
             '/home/archanalytics/log/recommender.log')
             log.debug("{}  server is down".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))

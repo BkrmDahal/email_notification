@@ -120,7 +120,7 @@ html_theme_options = {
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['static']
-html_logo = 'static/scotia-logo-dark.png'
+html_logo = 'static/logo.png'
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -241,4 +241,5 @@ def linkcode_resolve(domain, info):
         linespec = ""
 
     filename = info['module'].replace('.', '/')
+    filename = '/'.join(filename.split('/')[1:])
     return "https://github.com/BkrmDahal/email_notification/blob/master/%s.py%s" % (filename, linespec)

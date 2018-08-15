@@ -1,5 +1,5 @@
-email_notification.utils package
-================================
+email_notification.utils
+========================
 
 email_notification.utils.utils module
 -------------------------------------

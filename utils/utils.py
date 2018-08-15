@@ -1,6 +1,6 @@
 import os
 import logging
-import pyyaml
+import yaml
 
 def logger(logger_name = __name__, 
            filename = 'log.log', 

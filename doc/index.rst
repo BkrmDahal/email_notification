@@ -4,9 +4,11 @@
    contain the root `toctree` directive.
 
 Welcome to email_notification's documentation!
-=============================================
+==============================================
 
-Simple packages to send email if log files has error or check healthcheck endpoint send email if health check is down
+Simple packages to send email if log files has error or if healthcheck endpoint is down.
+
+Details:
 
 .. toctree::
    :maxdepth: 2
