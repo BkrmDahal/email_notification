@@ -1,0 +1,6 @@
+SMTP_SERVER: "smtp.gmail.com"
+PORT: "587"
+FROM: "notification.falconapi@gmail.com"
+TO: "bkrm.dahal@gmail.com"
+PASSWORD:
+HEALTHCHEKCK_URL: 

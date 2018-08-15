@@ -1,0 +1,5 @@
+# start subprocess
+LOG_DIR=/home/archanalytics/log/
+WORK_DIR=/home/archanalytics/email_notification/
+
+*/10 * * * * ${WORK_DIR}env/bin/python ${WORK_DIR}email_notification.py PROD >> ${LOG_DIR}email_notification.log
