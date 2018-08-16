@@ -126,7 +126,7 @@ def checkhealth_send_email(server_logfile=LOG_FILENAME_SERVER,
     # check if email log file has 'down' words we dont want to send email every 10mins
     # if server is down, we just record it on email log files
     # if server is down first time we send email
-    if 'down' in loglines[0]:
+    if 'down' in email_loglines[0]:
         if healthcheck(healthcheck_url):
             log.debug("{}  server is ok".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         else:

@@ -33,7 +33,9 @@ def logger(logger_name = __name__,
     handler.setFormatter(formatter)
 
     # add the handlers to the logger
-    logger.addHandler(handler)  
+    logger.addHandler(handler) 
+
+    return logger
     
 def walk_directory(dir_path, files_only = True):
     """
