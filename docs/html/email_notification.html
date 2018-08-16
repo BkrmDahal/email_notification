@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>email_notification &mdash; Email notification 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="email_notification.utils" href="email_notification.utils.html" />
+    <link rel="prev" title="Welcome to email_notification’s documentation!" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">email_notification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-email_notification.main">email_notification.main</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="email_notification.utils.html">email_notification.utils</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="email_notification.utils.html#module-email_notification.utils.utils">email_notification.utils.utils module</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Email notification</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>email_notification</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/email_notification.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="email-notification">
+<h1>email_notification<a class="headerlink" href="#email-notification" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-email_notification.main">
+<span id="email-notification-main"></span><h2>email_notification.main<a class="headerlink" href="#module-email_notification.main" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="email_notification.main.checkhealth_send_email">
+<code class="descclassname">email_notification.main.</code><code class="descname">checkhealth_send_email</code><span class="sig-paren">(</span><em>server_logfile=None</em>, <em>email_logfile=None</em>, <em>healthcheck_url=None</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BkrmDahal/email_notification/blob/master/main.py#L104-L139"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#email_notification.main.checkhealth_send_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the health and send the log file as error message if server is down</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>server_logfile:<code class="docutils literal notranslate"><span class="pre">str</span></code></dt>
+<dd>path of file where log of server is stored</dd>
+<dt>email_logfile:<code class="docutils literal notranslate"><span class="pre">str</span></code></dt>
+<dd>path of file where log of this email is stored</dd>
+<dt>healthcheck_url:<code class="docutils literal notranslate"><span class="pre">str</span></code></dt>
+<dd>url for health checkhealth</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>send email if server is down and email is not already send</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="email_notification.main.healthcheck">
+<code class="descclassname">email_notification.main.</code><code class="descname">healthcheck</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BkrmDahal/email_notification/blob/master/main.py#L85-L102"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#email_notification.main.healthcheck" title="Permalink to this definition">¶</a></dt>
+<dd><p>check the health of server</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>url:<code class="docutils literal notranslate"><span class="pre">str</span></code></dt>
+<dd>url of healthcheck endpoint</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>if live True else False</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="email_notification.main.send_email">
+<code class="descclassname">email_notification.main.</code><code class="descname">send_email</code><span class="sig-paren">(</span><em>error_msd</em>, <em>filename</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BkrmDahal/email_notification/blob/master/main.py#L32-L65"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#email_notification.main.send_email" title="Permalink to this definition">¶</a></dt>
+<dd><p>send email with error message from log file</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>error_msg:<code class="docutils literal notranslate"><span class="pre">list</span></code></dt>
+<dd>Error message, each sentence as list</dd>
+<dt>filename:<code class="docutils literal notranslate"><span class="pre">str</span></code></dt>
+<dd>filename of log file</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>True if success else log error message</dd>
+<dt>Raise:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">socket.error</span></code> if error while sending message.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="email_notification.main.tail">
+<code class="descclassname">email_notification.main.</code><code class="descname">tail</code><span class="sig-paren">(</span><em>filename</em>, <em>n</em><span class="sig-paren">)</span><a class="reference external" href="https://github.com/BkrmDahal/email_notification/blob/master/main.py#L67-L83"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#email_notification.main.tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get last n lines from file as string</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>filename:<code class="docutils literal notranslate"><span class="pre">str</span></code></dt>
+<dd>filename of log file</dd>
+<dt>n:<code class="docutils literal notranslate"><span class="pre">int</span></code></dt>
+<dd>number of lines</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>lines form file as string</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="email_notification.utils.html" class="btn btn-neutral float-right" title="email_notification.utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to email_notification’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, bkrm.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.0.1',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
