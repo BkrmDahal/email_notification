@@ -13,20 +13,21 @@ import requests
 from utils.utils import read_config, logger
 
 # Config file
-config = read_config('config.yaml')
+# config = read_config('config.yaml')
 
 # set variable from config file
-SMTP_SERVER = config['SMTP_SERVER']
-PORT = config['PORT']
-FROM = config['FROM']
-TO = config['TO']
-PASSWORD = config['PASSWORD']
-HEALTHCHECK_URL = config['HEALTHCHECK_URL']
-LOG_FILENAME_SERVER = config['LOG_FILENAME_SERVER']
-LOG_FILENAME_EMAIL = config['LOG_FILENAME_EMAIL']
+# SMTP_SERVER = config['SMTP_SERVER']
+# PORT = config['PORT']
+# FROM = config['FROM']
+# TO = config['TO']
+# PASSWORD = config['PASSWORD']
+# HEALTHCHECK_URL = config['HEALTHCHECK_URL']
+# LOG_FILENAME_SERVER = config['LOG_FILENAME_SERVER']
+# LOG_FILENAME_EMAIL = config['LOG_FILENAME_EMAIL']
 
-# initialise logger
-log = logger(LOG_FILENAME_EMAIL)
+# # initialise logger
+# log = logger(LOG_FILENAME_EMAIL)
+log = logger(__name__)
 
 
 def send_email(error_msd, filename):
@@ -101,9 +102,9 @@ def healthcheck(url):
     except:
         return False
         
-def checkhealth_send_email(server_logfile=LOG_FILENAME_SERVER,
-							email_logfile=LOG_FILENAME_EMAIL,
-							healthcheck_url=HEALTHCHECK_URL):
+def checkhealth_send_email(server_logfile,
+							email_logfile,
+							healthcheck_url):
     """
     Check the health and send the log file as error message if server is down
 

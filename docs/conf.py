@@ -25,6 +25,7 @@ import sys
 import inspect
 sys.path.insert(0, os.path.abspath('../../'))
 sys.path.insert(0, os.path.abspath('../'))
+sys.path.insert(0, os.path.abspath('../email_notification/'))
 
 # constant name <<change these value only>>
 PROJECT_NAME = 'Email notification'
