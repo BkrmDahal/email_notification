@@ -4,3 +4,5 @@ FROM: "notification.falconapi@gmail.com"
 TO: "bkrm.dahal@gmail.com"
 PASSWORD:
 HEALTHCHECK_URL: 
+LOG_FILENAME_SERVER:
+LOG_FILENAME_EMAIL:

@@ -22,9 +22,11 @@ FROM = config['FROM']
 TO = config['TO']
 PASSWORD = config['PASSWORD']
 HEALTHCHECK_URL = config['HEALTHCHECK_URL']
+LOG_FILENAME_SERVER = config['LOG_FILENAME_SERVER']
+LOG_FILENAME_EMAIL = config['LOG_FILENAME_EMAIL']
 
 # initialise logger
-log = logger("email")
+log = logger(LOG_FILENAME_EMAIL)
 
 
 def send_email(error_msd, filename):
@@ -98,20 +100,46 @@ def healthcheck(url):
         return True
     except:
         return False
-
-
-if __name__ == "__main__":
-    # get old time
-    loglines = tail('/home/archanalytics/log/email_notification.log', 100)
+        
+def checkhealth_send_email(server_logfile=LOG_FILENAME_SERVER,
+							email_logfile=LOG_FILENAME_EMAIL,
+							healthcheck_url=HEALTHCHECK_URL):
+	"""
+	Check the health and send the log file as error message if server is down
+	
+	Args:
+		server_logfile:``str``
+			path of file where log of server is stored
+		email_logfile:``str``
+			path of file where log of this email is stored
+		healthcheck_url:``str``
+			url for health checkhealth
+			
+	Return:
+		send email if server is down and email is not already send
+	
+	"""
+	# get the lines from files
+	email_loglines = tail(email_logfile, 100)
+	server_loglines  = tail(server_logfile, 100)
+	
+	# check if email log file has 'down' words we dont want to send email every 10mins
+	# if server is down, we just record it on email log files
+	# if server is down first time we send email
     if 'down' in loglines[0]:
-        if healthcheck(HEALTHCHECK_URL):
+        if healthcheck(healthcheck_url):
             log.debug("{}  server is ok".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         else:
             log.debug("{}  server is down".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
     else:
-        if not healthcheck(HEALTHCHECK_URL):
-            send_email(loglines,
-            '/home/archanalytics/log/recommender.log')
+        if not healthcheck(healthcheck_url):
+            send_email(server_loglines, server_logfile)
             log.debug("{}  server is down".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         else:
             log.debug("{}  server is ok".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+
+
+if __name__ == "__main__":
+    checkhealth_send_email(server_logfile=LOG_FILENAME_SERVER,
+							email_logfile=LOG_FILENAME_EMAIL,
+							healthcheck_url=HEALTHCHECK_URL)
