@@ -242,5 +242,5 @@ def linkcode_resolve(domain, info):
         linespec = ""
 
     filename = info['module'].replace('.', '/')
-    filename = '/'.join(filename.split('/')[1:])
+    # filename = '/'.join(filename.split('/')[1:])
     return "https://github.com/BkrmDahal/email_notification/blob/master/%s.py%s" % (filename, linespec)

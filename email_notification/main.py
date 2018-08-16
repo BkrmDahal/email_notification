@@ -27,10 +27,11 @@ from utils.utils import read_config, logger
 
 # # initialise logger
 # log = logger(LOG_FILENAME_EMAIL)
+
 log = logger(__name__)
 
 
-def send_email(error_msd, filename):
+def send_email(error_msd, filename, config):
     """
     send email with error message from log file
 
@@ -39,6 +40,19 @@ def send_email(error_msd, filename):
             Error message, each sentence as list
         filename:``str``
             filename of log file
+        config:``dict``
+            dict of config file
+
+            .. code-block:: json
+
+                {
+                    "TO":"example@gmail.com",
+                    "FROM":"example@gmail.com",
+                    "SMTP_SERVER":"smtp.gmail.com", # for gmail
+                    "PORT":"587",
+                    "PASSWORD": "password"
+
+                }
             
     Return:
         True if success else log error message
@@ -47,14 +61,14 @@ def send_email(error_msd, filename):
         ``socket.error`` if error while sending message.
     """
     msg = MIMEMultipart()
-    msg['From'] = FROM
-    msg['To'] = TO
-    password = PASSWORD
+    msg['From'] = config['FROM']
+    msg['To'] = config['TO']
+    password = config['PASSWORD']
     msg['Subject'] = "Server is down {}".format(sys.argv[1])
     body = "Error found in log: \n" + '\n'.join(error_msd) + "\n Check logfile: " + filename
     msg.attach(MIMEText(body, 'html'))
 
-    server = smtplib.SMTP(SMTP_SERVER, PORT)
+    server = smtplib.SMTP(config['SMTP_SERVER'], config['PORT'])
     server.starttls()
     server.login(msg['From'], password)
     try:
@@ -104,7 +118,8 @@ def healthcheck(url):
         
 def checkhealth_send_email(server_logfile,
 							email_logfile,
-							healthcheck_url):
+							healthcheck_url, 
+                            config):
     """
     Check the health and send the log file as error message if server is down
 
@@ -115,6 +130,19 @@ def checkhealth_send_email(server_logfile,
             path of file where log of this email is stored
         healthcheck_url:``str``
             url for health checkhealth
+        config:``dict``
+            dict of config file
+
+            .. code-block:: json
+
+                {
+                    "TO":"example@gmail.com",
+                    "FROM":"example@gmail.com",
+                    "SMTP_SERVER":"smtp.gmail.com", # for gmail
+                    "PORT":"587",
+                    "PASSWORD": "password"
+
+                }
             
     Return:
         send email if server is down and email is not already send
@@ -134,7 +162,7 @@ def checkhealth_send_email(server_logfile,
             log.debug("{}  server is down".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
     else:
         if not healthcheck(healthcheck_url):
-            send_email(server_loglines, server_logfile)
+            send_email(server_loglines, server_logfile, config)
             log.debug("{}  server is down".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         else:
             log.debug("{}  server is ok".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
